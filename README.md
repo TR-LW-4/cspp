@@ -42,6 +42,5 @@ For example:
 
 Possible extensions are discussed in the assignment section of the slides.
 
-Please make sure you fully understand the problem and the codebase before proposing new ideas.
 
 Good luck and enjoy exploring new ideas!
