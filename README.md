@@ -29,9 +29,7 @@ Before attempting any modifications, please make sure you fully understand the M
 - state transitions
 - the meaning of each dimension
 
-## Suggested Improvements
-
-Currently, training and testing are not separated. Evaluation results are printed during training.  
+Note: Currently, training and testing are not separated. Evaluation results are printed during training.  
 You may improve the implementation by separating the training and testing processes.
 
 For example:
@@ -39,3 +37,11 @@ For example:
 - periodically save the agent parameters during training
 - load the final trained model for independent evaluation
 - visualize the results (e.g., reward curves, crane operating time)
+
+## Possible Extensions
+
+Possible extensions are discussed in the assignment section of the slides.
+
+Please make sure you fully understand the problem and the codebase before proposing new ideas.
+
+Good luck and enjoy exploring new ideas!
