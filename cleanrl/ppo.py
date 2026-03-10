@@ -326,14 +326,14 @@ if __name__ == "__main__":
                 end = start + args.minibatch_size
                 mb_inds = b_inds[start:end]
 
-                # 使用masked版本
+                # use the mask
                 _, newlogprob, entropy, newvalue = agent.get_masked_action_and_value(
                     b_obs[mb_inds],
                     b_action_masks[mb_inds],
                     b_actions.long()[mb_inds]
                 )
 
-                # 【新增】计算 logratio 和 ratio
+                # compute “logratio” and “ratio”
                 logratio = newlogprob - b_logprobs[mb_inds]
                 ratio = logratio.exp()
 
