@@ -3,6 +3,8 @@
 This repository implements the container transportation problem using the CleanRL framework.  
 The codebase serves as the main artifact, while the associated paper provides background and reference.
 
+Paper link：https://arxiv.org/abs/2510.02589
+
 ## Running the Code
 
 The main entry point is:
