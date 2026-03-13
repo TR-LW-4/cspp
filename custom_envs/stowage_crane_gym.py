@@ -80,7 +80,7 @@ class MultiCraneStowageEnv(StowageEnv):
         state = super()._create_observation()
         # state = np.append(state, self.crane_positions)
         
-        # 目前删除 busy_relative 
+         
         busy_relative = self.crane_busy_until - np.repeat(self.current_time, self.num_cranes)
         state = np.append(state, busy_relative)
         
@@ -232,7 +232,7 @@ class MultiCraneStowageEnv(StowageEnv):
         terminated = self._check_termination()
         self._advance_time()
         
-        # 我感觉下面这两个应该没什么用
+        
         # crane_idle_time = max(0,np.sum(self.current_time-self.crane_busy_until))
         # reward -= crane_idle_time * self.time_penalty_coef * 0.5
         observation = self._create_observation()
