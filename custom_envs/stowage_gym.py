@@ -110,14 +110,14 @@ class StowageEnv(gym.Env):
         
         # print(valid_actions)
 
-        # if action not in valid_actions:    # 这个在随机策略中没用到
+        # if action not in valid_actions:    
         #     reward = -100.0
         #     observation = self._create_observation()   
         #     info["yard_mask"] = valid_actions   # 这是什么意思
         #     terminated = False
         #     return observation, reward, terminated, truncated, info
         
-        shifters = self._process_shifters(action, self.current_vessel_slot)  # action的解空间其实有300个，但是只有200个集装箱，正常
+        shifters = self._process_shifters(action, self.current_vessel_slot)  
         # Sequencer select next vessel slot
         self.current_vessel_slot = self._get_next_vessel_slot()
             
@@ -293,7 +293,7 @@ class StowageEnv(gym.Env):
             # Assign groups to vessel slots
             slots_per_group = len(valid_slots) // self.group_num
             
-            # print(slots_per_group)  每个组可以分到多少槽位
+            # print(slots_per_group)  
             
             for group in range(self.group_num):
                 start_pos = group * slots_per_group
@@ -302,9 +302,9 @@ class StowageEnv(gym.Env):
                 if len(group_indices) > 0:
                     self.vessel_state[group_indices, StateIds.GROUP.value] = group
                     
-        # print(self.vessel_state) 现在的 vessel 有组了
+        # print(self.vessel_state) 
 
-        self.vessel_slots_filled = 0   # 当前 episode 中，已经成功往船上放了多少个箱子
+        self.vessel_slots_filled = 0   
 
         self._initialize_containers()
         
@@ -312,7 +312,7 @@ class StowageEnv(gym.Env):
         
         self.available_groups = np.unique(
             self.yard_state[self.yard_state[:, StateIds.IS_OCCUPIED.value] == 1, StateIds.GROUP.value]
-        )    # 获取当前所有被占用 slot 所属的 group 编号（去重）
+        )    
         
         # print(self.available_groups)
         self.current_vessel_slot = self._get_next_vessel_slot()
@@ -349,8 +349,8 @@ class StowageEnv(gym.Env):
         tiers = self.vessel_state[valid_slots, StateIds.TIER.value]
         
         # print(valid_slots)
-        sort_order = np.lexsort((rows, tiers, bays)) # sort_order 是位置索引   # 这个还有点没看懂
-        return valid_slots[sort_order[0]]  # vessel_state 的行索引（slot 编号） # 这个还有点没看懂
+        sort_order = np.lexsort((rows, tiers, bays)) # sort_order
+        return valid_slots[sort_order[0]]
 
     def _create_observation(self):
         
@@ -375,11 +375,11 @@ class StowageEnv(gym.Env):
     def _get_valid_yard_actions(self) -> np.ndarray:
         if self.current_vessel_slot is None:
             return []
-        occupied_mask = self.yard_state[:, StateIds.IS_OCCUPIED.value] == 1 # 真正有箱子的slot
+        occupied_mask = self.yard_state[:, StateIds.IS_OCCUPIED.value] == 1 
        
-        bay_mask = self.yard_state[:, StateIds.BAY.value] % 2 == 1 # 只允许奇数bay
+        bay_mask = self.yard_state[:, StateIds.BAY.value] % 2 == 1 
         
-        # yard 中箱子的 group 必须等于当前要填的 船舱位的 group
+    
         group_mask = (
             self.yard_state[:, StateIds.GROUP.value]
             == self.vessel_state[self.current_vessel_slot, StateIds.GROUP.value]
